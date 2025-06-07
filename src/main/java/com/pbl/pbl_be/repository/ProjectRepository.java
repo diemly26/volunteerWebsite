@@ -22,7 +22,6 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     @Query("SELECT p FROM Project p WHERE p.pm.userId = :pmId")
     List<Project> findProjectsByPmId(@Param("pmId") Integer pmId);
 
-    // Tìm các project đã hết hạn nhưng chưa được đánh dấu finished
     @Query("SELECT p FROM Project p WHERE p.endTime < :currentDate AND p.status != :finishedStatus")
     List<Project> findExpiredProjects(@Param("currentDate") LocalDate currentDate,
                                       @Param("finishedStatus") Project.Status finishedStatus);
